@@ -1,0 +1,25 @@
+<launch>
+  <master auto="start"/>
+  <!-- Run the robot sdk interface -->
+  <include file="$(find roborts_bringup)/launch/base.launch" />
+
+  <!-- Run the rplidar -->
+  <node name="rplidar_node" pkg="rplidar_ros" type="rplidarNode" output="screen">
+      <param name="serial_port" type="string" value="/dev/ttyUSB0"/>
+      <param name="serial_baudrate" type="int" value="256000"/>
+      <param name="frame_id" type="string" value="base_laser_link"/>
+      <param name="inverted" type="bool" value="false"/>
+      <param name="angle_compensate" type="bool" value="true"/>
+  </node>
+
+  <!-- Run the slam gmapping -->
+  <include file="$(find roborts_bringup)/launch/slam_gmapping.xml"/>
+
+  <!-- Publish static tf -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_base_laser_link_broadcaster"
+          args="0.0 0.0 0.0 0.0 0.0 0.0 base_link base_laser_link" />
+
+<!-- Run the rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find roborts_bringup)/rviz/mapping.rviz" />
+</launch>
+
