@@ -149,6 +149,17 @@ class Blackboard {
       return false;
     }
   }
+
+  bool IsNewEnemy(){
+    bool goal=IsEnemyDetected();
+    if(goal){
+      goal =  false;
+      return true;
+    } else{
+      return false;
+    }
+  }
+
   /*---------------------------------- Tools ------------------------------------------*/
 
   double GetDistance(const geometry_msgs::PoseStamped &pose1,
