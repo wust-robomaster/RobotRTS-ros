@@ -2,7 +2,7 @@ use_map_topic             : true
 first_map_only            : false
 gui_publish_rate          : 10
 
-laser_min_range           : 0.15
+laser_min_range           : 0.01
 laser_max_range           : 8.0
 laser_max_beams           : 30
 
